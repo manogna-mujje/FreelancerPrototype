@@ -1,0 +1,44 @@
+.App {
+  text-align: center;
+}
+
+.Menu {
+  height: 50px;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+ul { 
+  list-style-type: none; /*******Removes list bullets********/
+}
+
+#left-menu li {
+  float: left;
+  margin: auto;
+}
+#right-menu li {
+  float: right;
+}
+
+#right-menu {
+padding-right: 140px;
+}
+
+a {
+  text-decoration: none;
+  padding: 40px 16px;
+  position: relative;
+  top: 16px;
+  bottom: 16px;
+  cursor: pointer;
+}
+
+.menu-button {
+  text-decoration: none;
+  background-color: #ff7b00;
+  padding: 10px 14px;
+  color: white;
+  border-radius: 6px;
+  border: 0;
+  cursor: pointer;
+}
