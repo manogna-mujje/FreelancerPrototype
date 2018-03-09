@@ -1,23 +1,57 @@
 var mysql = require('mysql');
+var flag;
+var connection = mysql.createConnection({
+    host     : 'localhost',
+    user     : 'root',
+    password : 'password',
+    database : 'freelancer',
+    port	 : 3306
+});
 
-//Put your mysql configuration settings - user, password, database and port
-function getConnection(){
-	var connection = mysql.createConnection({
-	    host     : 'localhost',
-	    user     : 'root',
-	    password : 'password',
-	    database : 'freelancer',
-        port	 : 3306
-    });
-	return connection;
-}
+var connected;
 
-function checkConnection(){
-    var connection=getConnection();
-    if(connection != null){
-        console.log('Connection established with database.'); 
+connection.connect(function(err) {
+    if (err) {
+        connected = false;
+        throw err;
+    } else {
+        console.log("Connected!");
+        connected = true;
     }
+});
+
+function insert(email, username, password){
+    if (connected){
+        //Insert a record in the "USERS" table:
+        var sql = "INSERT INTO USERS SET ?";
+       connection.query(sql, {EMAIL: email, USERNAME:username, USERPWD:password}, function(err, result) { 
+            if (err) throw err;
+            console.log("1 record inserted");
+            flag = true;
+        });
+    }
+    console.log(flag);
 }
+
+// function insert(email, username, password) {
+//         var check = false;
+//         connection.connect(function(err){
+//         if (err) throw err;
+//         console.log("Connected!");
+//         var searchQuery = "SELECT USERNAME FROM USERS WHERE USERNAME = " + username;
+//         connection.query(searchQuery, function(err, result) { 
+//             if (err) {
+//                 var insertQuery = "INSERT INTO USERS SET ?";
+//                 connection.query(insertQuery, {EMAIL: email, USERNAME:username, USERPWD:password}, function(err, result) { 
+//                     if (err) throw err;
+//                         console.log("Record already exists");
+//                         check = true;
+//                     });
+//             } 
+//           });
+//         })
+//         return check;
+// }
 
 
 // function fetchData(callback,sqlQuery){
@@ -31,7 +65,7 @@ function checkConnection(){
 // 			console.log("ERROR: " + err.message);
 // 		}
 // 		else 
-// 		{	// return err or result
+// 		{	
 // 			console.log("DB Results:"+rows);
 // 			callback(err, rows);
 // 		}
@@ -42,4 +76,4 @@ function checkConnection(){
 
 // exports.fetchData=fetchData;
 
-exports.checkConnection=checkConnection;
+exports.insert=insert;

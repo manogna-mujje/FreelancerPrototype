@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
+
 
 class Menu extends Component {
     render() {
@@ -16,7 +18,7 @@ class Menu extends Component {
                     <div id="right-menu">
                         <ul>
                             <li><a className="menu-button" href="https://www.google.com">Post a Project </a></li> 
-                            <li><a href="https://www.google.com">Sign Up</a></li>
+                            <li> <a> Sign Up </a> </li>
                             <li><a href="https://www.google.com">Log In</a></li>
                         </ul>     
                     </div>   

@@ -5,7 +5,7 @@ class Section1 extends Component {
     render(){
         return (
             <div className="Section1"> 
-               <img src={img} alt="Background Image" />
+               <img src={img} alt="Background" />
             </div>
         );
     }

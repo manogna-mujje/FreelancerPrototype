@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import '../styles/App.css';
-import Menu from './Menu';
-import Section1 from './Section1';
+import Menu from './menu';
+import Section1 from './section1';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Menu />
-        <Section1 />
-      </div>
+        <div className="App">
+          <Menu />
+          <Section1 />
+        </div>
     );
   }
 }

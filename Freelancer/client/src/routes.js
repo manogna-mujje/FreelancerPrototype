@@ -1,22 +1,25 @@
-// import React from 'react';
-// import { Route, IndexRoute } from 'react-router';
+import React from 'react';
+import { Router, Route } from 'react-router';
 
-// /**
-//  * Import all page components here
-//  */
-// import App from './App';
-// import MainPage from './components/MainPage';
-// import SomePage from './components/SomePage';
-// import SomeOtherPage from './components/SomeOtherPage';
+/**
+ * Import all page components here
+ */
+import App from './components/App';
+import Signup from './components/Signup';
 
-// /**
-//  * All routes go here.
-//  * Don't forget to import the components above after adding new route.
-//  */
-// export default (
-//   <Route path="/" component={App}>
-//     <IndexRoute component={MainPage} />
-//     <Route path="/some/where" component={SomePage} />
-//     <Route path="/some/otherpage" component={SomeOtherPage} />
-//   </Route>
-// );
+var Routes = () => {
+    return (
+        <div>
+            <Router> 
+                <Route path="/" component={App} />
+                <Route path="/signup" component={Signup} />
+            </Router>
+        </div>
+    )
+}
+
+/**
+ * All routes go here.
+ * Don't forget to import the components above after adding new route.
+ */
+export default Routes;
