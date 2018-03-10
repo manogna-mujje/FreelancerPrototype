@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import * as API from '../APIs/api';
-
+import {loginAccount} from '../actions/index';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 class Login extends Component {
     constructor(props){
@@ -11,15 +13,12 @@ class Login extends Component {
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+       // this.props.loginAccount = this.props.loginAccount.bind(this);
     }
     
     handleSubmit(event){
-        API.validateLogin(this.state.username, this.state.password).then((res) => {
-            if (res.status === 200)
-            this.props.history.push('/profile');
-            else 
-            document.getElementById("error-message").style.display = "block";
-        })
+        console.log(typeof(this.props.loginAccount));
+        this.props.loginAccount(this.state.username, this.state.password, this);
         event.preventDefault();
     }
 
@@ -56,4 +55,18 @@ class Login extends Component {
     }
 }
 
-export default Login;
+function mapStateToProps(state) {
+    return {  
+        loginOutput: state.loginOutput
+    };
+}
+
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({ 
+            loginAccount: loginAccount
+        }, dispatch);
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login); 
+

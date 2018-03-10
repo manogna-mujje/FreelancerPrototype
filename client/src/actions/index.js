@@ -1,4 +1,5 @@
 import * as API from '../APIs/api';
+
 export const clickEmail=(data) => {
 	return {
 		type: 'CLICK_EMAIL',
@@ -26,5 +27,14 @@ export const clickUsername = (data) => {
 export const createAccount = () => {
 	return {
 		type: 'CREATE_ACCOUNT'
+	}
+}
+
+export const loginAccount = (username, password, object) => {
+	const request = API.validateLogin(username, password);
+	return {
+		type: 'LOGIN_ACCOUNT',
+		payload: request,
+		object: object
 	}
 }
