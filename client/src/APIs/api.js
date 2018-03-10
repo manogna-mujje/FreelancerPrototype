@@ -1,4 +1,5 @@
-const api = process.env.REACT_APP_CONTACTS_API_URL || 'http://localhost:3000'
+import { withRouter } from 'react-router-dom';
+const api = process.env.REACT_APP_CONTACTS_API_URL || 'http://localhost:3000';
 
 var url;
 
@@ -10,6 +11,7 @@ export const validateSignup = function (email, username, password, object){
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
               },
+              credentials: 'include',
               body: JSON.stringify({
                   email: email,
                   username: username,
@@ -20,73 +22,35 @@ export const validateSignup = function (email, username, password, object){
                 console.log(res);
                 if(res.status === 200){
                     object.setState({
+                        signedUp: true,
                         message: 'Signup successful'
                     })
-                    document.getElementById('message').innerHTML = object.state.message;
                 } else if (res.status === 400){
                     object.setState({
+                        signedUp: false,
                         message: 'Username already exists.'
                     })
-                    document.getElementById('message').innerHTML = object.state.message;
                 }
-        //         res.json()
-        //       .then((data) => {
-        //       console.log(data);
-        //       object.setState({
-        //           message: data,
-        //       });
-        //       return data;
-        //   }, (err) => {
-        //       console.log(err);
-        //   } )
-        console.log(res);
       }); 
       return true;   
   };
 
-  export const validateLogin = function (username, password, object){
-    url = `${api}/login`;
-    fetch(url, {
+  export const validateLogin = function (username, password){
+      console.log(`API-username: ${username}`);
+      console.log(`API-password: ${password}`);
+        url = `${api}/login`;
+        return fetch(url, {
               method: 'POST',
               headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-              },
+              }, 
+              credentials: "omit",
               body: JSON.stringify({
                   username: username,
                   password: password
               })
             })
-            .then(res => {
-                console.log(res);
-                if(res.status === 200){
-                    object.setState({
-                        message: 'Login success'
-                    })
-                    document.getElementById('message').innerHTML = object.state.message;
-                } else if (res.status === 400){
-                    object.setState({
-                        message: 'Incorrect Password'
-                    })
-                    document.getElementById('message').innerHTML = object.state.message;
-                }else if (res.status === 404){
-                    object.setState({
-                        message: 'Username does not exist.'
-                    })
-                    document.getElementById('message').innerHTML = object.state.message;
-                }
-        //         res.json()
-        //       .then((data) => {
-        //       console.log(data);
-        //       object.setState({
-        //           message: data,
-        //       });
-        //       return data;
-        //   }, (err) => {
-        //       console.log(err);
-        //   } )
-      }); 
-      return true;   
   };
 
   export const validateUsername = function (username){

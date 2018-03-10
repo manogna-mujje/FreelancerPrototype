@@ -21,6 +21,10 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-    contentBase: './'
+    contentBase: './',
+    headers: {
+      'Access-Control-Allow-Origin': 'http://localhost:8080',
+      'Access-Control-Allow-Credentials': "omit"
+    }
   }
 };

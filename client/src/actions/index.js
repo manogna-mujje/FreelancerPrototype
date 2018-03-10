@@ -1,4 +1,4 @@
-
+import * as API from '../APIs/api';
 export const clickEmail=(data) => {
 	return {
 		type: 'CLICK_EMAIL',
@@ -7,9 +7,10 @@ export const clickEmail=(data) => {
 		
 }
 
-export const clickPassword = () =>  {
+export const clickPassword = (data) =>  {
 	return {
-		type: 'CLICK_PASSWORD'
+		type: 'CLICK_PASSWORD',
+		data
 	}
 		
 }
@@ -24,6 +25,6 @@ export const clickUsername = (data) => {
 
 export const createAccount = () => {
 	return {
-		type: 'SUBMIT_FORM'
+		type: 'CREATE_ACCOUNT'
 	}
 }

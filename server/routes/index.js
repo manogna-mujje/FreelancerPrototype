@@ -19,8 +19,10 @@ router.post('/signup', function(req, res, next) {
         if(result){
           console.log("1 record inserted");
           res.status(200).send('Signup successful');
+        } else {
+          res.status(400).send('Username already exists');
         }
-        res.status(400).send('Username already exists');
+        return;
       }
       mysql.fetchData(callback, sql, object);
 });
@@ -32,8 +34,9 @@ router.post('/login', function(req, res, next) {
   var sql =  "SELECT USERNAME, USERPWD FROM USERS WHERE USERNAME = ? ";
   var object = [req.body.username];
   function callback (err, result) { 
+    console.log(result.length);
     if (result.length === 0) {
-      res.status(404).send('Username does not exist.');
+     res.status(404).send('Username does not exist.');
     } else {
       /* Convert RowDataPacket into JSON object*/
       var string=JSON.stringify(result);
@@ -42,7 +45,7 @@ router.post('/login', function(req, res, next) {
       if(json[0].USERPWD == req.body.password){
         res.status(200).send('Login successful');
       } else {
-        res.status(400).send('Incorrect Password')
+       res.status(400).send('Incorrect Password')
       }
     }
   }
@@ -60,6 +63,7 @@ router.post('/validateUsername', function(req, res, next) {
     } else {
       res.status(400).send('Username already exists');
     }
+    return;
   }
   mysql.fetchData(callback, sql, object);
 });

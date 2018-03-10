@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import * as API from '../APIs/api';
-import {clickEmail, clickUsername} from '../actions/index';
+import {clickEmail, clickUsername, clickPassword} from '../actions/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -8,6 +8,7 @@ class Signup extends Component {
     constructor(props){
         super(props);
         this.state = {
+            signedUp: false,
             message: "",
             formType: 'signup'
         }
@@ -34,7 +35,11 @@ class Signup extends Component {
             case 'id-username':
                 document.getElementById("id-username").style.border= "2px solid red";
                 this.props.clickUsername(event.target.value);
-                break;    
+                break; 
+            case 'id-password':
+                document.getElementById("id-password").style.border= "2px solid red";
+                this.props.clickPassword(event.target.value);
+                break;   
         }
     }
     
@@ -48,6 +53,10 @@ class Signup extends Component {
             case 'username':
                 result = this.props.usernameMsg.output;
                 resultField = "username-message";
+                break;
+            case 'password':
+                result = this.props.passwordMsg.output;
+                resultField = "password-message";
                 break;
         }
         if (result != ""){
@@ -69,7 +78,10 @@ class Signup extends Component {
                         onChange={this.handleChange}
                     /> <br />
                      <p className="message" id="username-message"> {this.handleOutput('username')} </p>
-                    <input className="inputField" type="password" id= "id-password"  name="password" placeholder="Password"/> <br />
+                    <input className="inputField" type="password" id= "id-password"  name="password" placeholder="Password"
+                        onChange={this.handleChange}
+                    /> <br />
+                    <p className="message" id="password-message"> {this.handleOutput('password')} </p>
                     <input type="radio" name="accountType" value="hire"> Hire </input>
                     <input type="radio" name="accountType" value="work"> Work </input> <br/>
                     <input className="inputField" id="submit" type="submit" value="Create Account" /> 
@@ -81,11 +93,19 @@ class Signup extends Component {
 
 
 function mapStateToProps(state) {
-    return {  emailMsg: state.emailMsg, usernameMsg: state.usernameMsg };
+    return {  
+        emailMsg: state.emailMsg, 
+        usernameMsg: state.usernameMsg, 
+        passwordMsg: state.passwordMsg 
+    };
 }
 
 function mapDispatchToProps(dispatch){
-    return bindActionCreators({ clickEmail: clickEmail, clickUsername: clickUsername }, dispatch);
+    return bindActionCreators({ 
+            clickEmail: clickEmail, 
+            clickUsername: clickUsername, 
+            clickPassword: clickPassword 
+        }, dispatch);
 }
 
 

@@ -61,6 +61,7 @@
     margin: 10px;
     width: 282px;
     height: 44px;
+    border: 1px;
     padding: 0px, 16px;
     border: 1px solid gray;
     border-radius: 4px;
@@ -77,5 +78,20 @@
     display: none;
   }
 
+
+  p#error-message {
+    color: firebrick;
+    display: none;
+    font-size: 80%;
+    font-weight: bold;
+    word-wrap: normal;
+    width: 282px;
+    height: 75px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid firebrick;
+    background-color: rgb(238, 194, 194);
+    border-radius: 5px;
+  }
 
   
