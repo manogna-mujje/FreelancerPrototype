@@ -7,13 +7,13 @@ export default function (initialState, action) {
         case 'CLICK_USERNAME':
             console.log(typeof(action.data));
             if(action.data.length < 3 || action.data.length > 16)
-                return {output: "Username must be 3-16 characters."};
+                return "Username must be 3-16 characters.";
             if(action.data.length >= 3  && action.data.length <= 16)
                 API.validateUsername(action.data);
-                return {output: ""};
-            return {output: "default"};
+                return "";
+            return "default";
 
         default:
-            return {output: ""};
+            return "";
     }
 }

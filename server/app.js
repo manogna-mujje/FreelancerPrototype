@@ -4,18 +4,24 @@ var bodyParser = require('body-parser');
 var http = require('http');
 var index = require('./routes/index');
 var ejs = require('ejs');
+var session = require('client-sessions');
 const cors = require('cors');
 
 var app = express();
 
 app.set('port', process.env.PORT || 3001);
 
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
-app.use('/', index);
-
+app.use(session({
+  cookieName: 'session',
+  secret: 'random_string_goes_here',
+  duration: 30 * 60 * 1000,
+  activeDuration: 5 * 60 * 1000,
+}));
 
 //Cross-Origin connection
 app.use(function(req, res, next) {
@@ -31,12 +37,15 @@ app.use(cors({
   credentials: true
 }));
 
+app.use('/', index);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
+
 
 // error handler
 app.use(function(err, req, res, next) {

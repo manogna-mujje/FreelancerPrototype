@@ -24,12 +24,10 @@
   padding-right: 140px;
   }
   
-  a {
+  li {
     text-decoration: none;
-    padding: 40px 16px;
+    padding: 16px 16px;
     position: relative;
-    top: 16px;
-    bottom: 16px;
     cursor: pointer;
   }
   
@@ -89,9 +87,22 @@
     height: 75px;
     margin: 10px;
     padding: 10px;
-    border: 1px solid firebrick;
+    border: 1px solid rgb(233, 130, 130);
     background-color: rgb(238, 194, 194);
     border-radius: 5px;
   }
 
-  
+  div .form-footer{
+    font-size: 82%;
+    margin: 10px;
+    width: 282px;
+    height: 44px;
+    border: 1px;
+    padding: 0px, 16px;
+    position: relative;
+    text-align: center;
+  }
+
+  #logout {
+    float: right;
+  }

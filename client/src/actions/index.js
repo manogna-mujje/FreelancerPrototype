@@ -35,6 +35,7 @@ export const loginAccount = (username, password, object) => {
 	return {
 		type: 'LOGIN_ACCOUNT',
 		payload: request,
-		object: object
+		object: object,
+		username: username
 	}
 }

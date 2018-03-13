@@ -12,6 +12,8 @@ import reducers from './reducers';
 
 const createStoreWithMiddleware = applyMiddleware()(createStore);
 
+export const store=createStoreWithMiddleware(reducers);
+
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
     <BrowserRouter> 
@@ -19,7 +21,7 @@ ReactDOM.render(
         <Switch>
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
-          <Route path="/profile" component={Profile} />
+          <Route path="/profile/:user" component={Profile} />
           <Route exact path="/" component={App} />
         </Switch>
       </div>

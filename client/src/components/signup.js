@@ -3,6 +3,7 @@ import * as API from '../APIs/api';
 import {clickEmail, clickUsername, clickPassword} from '../actions/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Link } from 'react-router-dom';
 
 class Signup extends Component {
     constructor(props){
@@ -44,22 +45,23 @@ class Signup extends Component {
     }
     
     handleOutput(text){
+        console.log(this.props);
         var result, resultField;
         switch (text){
             case 'email':
-                result = this.props.emailMsg.output;
+                result = this.props.emailMsg;
                 resultField = "email-message";
                 break;
             case 'username':
-                result = this.props.usernameMsg.output;
+                result = this.props.usernameMsg;
                 resultField = "username-message";
                 break;
             case 'password':
-                result = this.props.passwordMsg.output;
+                result = this.props.passwordMsg;
                 resultField = "password-message";
                 break;
         }
-        if (result != ""){
+        if (result.length != 0){
             document.getElementById(resultField).style.display= "block";
             return result;
         }
@@ -86,6 +88,12 @@ class Signup extends Component {
                     <input type="radio" name="accountType" value="work"> Work </input> <br/>
                     <input className="inputField" id="submit" type="submit" value="Create Account" /> 
                 </form>
+                <div className="form-footer"> By registering you confirm that you accept the <span> <a href= 'https://www.google.com/'> Terms and Conditions </a> </span> and <span> <a href= 'https://www.google.com/'>Privacy Policy </a> </span></div>
+                <br /> 
+                <br />
+                <br /> 
+                <br />
+                <div className = "form-footer"> Already a Freelancer.com member? <span> <Link to= '/login'>Log In </Link> </span> </div>
             </div>
         );
     }

@@ -4,15 +4,15 @@ export default function (initialState, action) {
     switch (action.type){
         case 'CLICK_EMAIL':
             if (action.data == '')
-                return { output: "Please enter an email address."};
+                return "Please enter an email address.";
             else if(!validateEmail(action.data))
-                return { output: "Please enter a valid email address." };
+                return "Please enter a valid email address.";
             else 
                 document.getElementById("email-message").style.display= "none";
                 document.getElementById("id-email").style.border= "2px solid green";
-                return {output: ""};
+                return "";
         default:
-            return {output: ""};
+            return "";
     }
 }
 

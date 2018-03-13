@@ -77,3 +77,40 @@ export const validateSignup = function (email, username, password, object){
                 }
             }); 
 };
+
+
+export const profile = function (username){
+    url = `${api}/profile`;
+    return fetch(url, {
+              method: 'POST',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                  username: username
+              })
+            })
+};
+
+export const logout = function (){
+    url = `${api}/logout`;
+    return fetch(url, {
+              method: 'GET',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+              }
+            })
+};
+
+export const checkSession = function (){
+    url = `${api}/checkSession`;
+    return fetch(url, {
+              method: 'GET',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+              }
+            })
+};
