@@ -45,7 +45,7 @@ export const validateSignup = function (email, username, password, object){
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
               }, 
-              credentials: "omit",
+              credentials: 'include',
               body: JSON.stringify({
                   username: username,
                   password: password
@@ -61,6 +61,7 @@ export const validateSignup = function (email, username, password, object){
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
               },
+              credentials: 'include',
               body: JSON.stringify({
                   username: username
               })
@@ -87,6 +88,7 @@ export const profile = function (username){
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
               },
+              credentials: 'include',
               body: JSON.stringify({
                   username: username
               })
@@ -100,7 +102,8 @@ export const logout = function (){
               headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-              }
+              },
+              credentials: 'include'
             })
 };
 
@@ -111,6 +114,7 @@ export const checkSession = function (){
               headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-              }
+              },
+              credentials: 'include'
             })
 };

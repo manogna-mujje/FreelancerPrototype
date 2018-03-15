@@ -31,14 +31,17 @@ router.post('/signup', function(req, res, next) {
 /* Login Page */
 
 router.post('/login', function(req, res, next) {
+  console.log('Login API hit.');
+  // res.send('Success');
   //Verify a record in the "USERS" table:
   var sql =  "SELECT USERNAME, USERPWD FROM USERS WHERE USERNAME = ? ";
   var object = [req.body.username];
   function callback (err, result) { 
     console.log(result.length);
-    // console.log(req.session);
+    console.log(req.session);
     if (result.length === 0) {
-     res.status(404).send('Username does not exist.');
+    //  res.status(404).send('Username does not exist.');
+     throw new Error('Username does not exist.');
     } else {
       /* Convert RowDataPacket into JSON object*/
       var string=JSON.stringify(result);
@@ -49,7 +52,8 @@ router.post('/login', function(req, res, next) {
        console.log(req.session.user);
         res.status(200).send('Login successful');
       } else {
-       res.status(400).send('Incorrect Password')
+        throw new Error('Incorrect Password');
+    // res.status(400).send('Incorrect Password')
       }
     }
   }
@@ -59,6 +63,8 @@ router.post('/login', function(req, res, next) {
 /* Validate Username */
 
 router.post('/validateUsername', function(req, res, next) {
+  console.log('validateUsername API hit.');
+  console.log(req.session.user);
   var sql =  "SELECT USERNAME FROM USERS WHERE USERNAME = ? ";
   var object = [req.body.username];
   function callback (err, result) { 
@@ -76,6 +82,8 @@ router.post('/validateUsername', function(req, res, next) {
 /* Profile Page */
 
 router.post('/profile', function(req, res, next) {
+  console.log('Profile API hit.');
+  console.log(req.session.user);
   if (req.session && req.session.user) {
     var sql =  "SELECT USERNAME FROM USERS WHERE USERNAME = ? ";
     var object = [req.body.username];
@@ -92,18 +100,29 @@ router.post('/profile', function(req, res, next) {
 );
 
 router.get('/logout', function(req, res, next) {
+  console.log('Logout API hit.');
+  console.log(req.session);
   if (req.session && req.session.user) {
-    req.session.destroy();
+    req.session.reset();
+    console.log(req.session);
     res.status(200).send('Logout success');
+  } else {
+    res.status(400).send('Already logged out.');
   }
-  res.status(200).send('Logout success');
+ 
 });
 
 router.get('/checkSession', function(req, res, next){
+  console.log('Session API hit.')
+  console.log(req.session);
   if(req.session && req.session.user) {
+    console.log('Session existing')
     res.status(200).json({user: req.session.user});
-  } else {
-    res.status(404);
+  }
+  else {
+    console.log('Error: Session ended')
+    throw ('Session already ended.');
+    // res.status(400);
   }
 })
 module.exports = router;

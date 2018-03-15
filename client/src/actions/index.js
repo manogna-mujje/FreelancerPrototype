@@ -29,13 +29,25 @@ export const createAccount = () => {
 		type: 'CREATE_ACCOUNT'
 	}
 }
+  
 
-export const loginAccount = (username, password, object) => {
-	const request = API.validateLogin(username, password);
-	return {
-		type: 'LOGIN_ACCOUNT',
-		payload: request,
-		object: object,
-		username: username
-	}
-}
+export const loginAccount = (username, password) => ({
+	type: 'LOGIN_ACCOUNT',
+	meta: {user: username},
+	payload: new Promise(resolve => {
+	  setTimeout(() => API.validateLogin(username, password).then(response => {
+		resolve(response.status);
+	  }), 500);
+	})
+});
+
+export const checkSession = () => ({
+	type: 'CHECK_SESSION',
+	payload: new Promise((resolve, reject) => {
+	  API.checkSession().then(response => {
+			resolve(response.json());
+			}).catch((err) => {
+				reject(err);
+			})
+	})
+});

@@ -3,7 +3,6 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var http = require('http');
 var index = require('./routes/index');
-var ejs = require('ejs');
 var session = require('client-sessions');
 const cors = require('cors');
 

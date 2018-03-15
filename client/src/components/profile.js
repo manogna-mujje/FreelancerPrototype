@@ -1,43 +1,59 @@
 import React, {Component} from 'react';
 import * as API from '../APIs/api';
+import {checkSession} from '../actions/index';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 
 class Profile extends Component {
     constructor(props){
         super(props);
-        // this.state = {
-        //     loggedIn: true
-        // }
         this.handleClick = this.handleClick.bind(this);
     }
 
-    // componentDidMount(){
-    //     if(this.state.loggedIn) {
-    //         history.pushState(null, null, location.href);
-    //         window.onpopstate = function(event) {
-    //           history.go(1);
-    //         };
-    //       }
-    // }
-
-
+    componentDidMount(){
+       console.log(this.props.checkSession());
+        this.props.checkSession().then((res)=> {
+            console.log(res);
+            if(!this.props.isLoggedin || (this.props.match.params.user !== this.props.user)){
+                this.props.history.push('/login');
+            }
+        });
+        
+    }
+    
     handleClick(){
-        // this.setState ({
-        //     loggedIn: false
-        // });
-        API.logout().then(() => {
+        API.logout().then((res) => {
+           if(res.status === 200){
             this.props.history.push('/login');
+           }
         })
     }
 
     render(){
+        console.log(this.props);
         return(
             <div>
-                <h1>Hello, {this.props.location.state.username }</h1>
+                <h1>Hello, {this.props.match.params.user}</h1>
                 <button className="menu-button" id="logout" onClick={this.handleClick} > Logout </button>
             </div>
         );
     }
 }
 
-export default Profile;
+function mapStateToProps(state) {
+    return {  
+        isLoggedin: state.session.isLoggedin,
+        user: state.session.user
+    };
+}
+
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({ 
+            checkSession: checkSession
+        }, dispatch);
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile); 
+
