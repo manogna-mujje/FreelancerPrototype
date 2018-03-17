@@ -51,3 +51,27 @@ export const checkSession = () => ({
 			})
 	})
 });
+
+export const bidsTabClick = (project) => ({
+	type: 'BIDS_CLICK',
+	payload: new Promise((resolve, reject) => {
+		API.showBids(project).then(response => {
+			console.log('resolving response');
+			  resolve(response.json());
+			  }).catch((err) => {
+				  reject(err);
+			  })
+	  })
+});
+
+export const detailsTabClick = (project) => ({
+	type: 'PROJECT_DETAILS_CLICK',
+	payload: new Promise((resolve, reject) => {
+		API.showProjectDetails(project).then(response => {
+			console.log('resolving response');
+			  resolve(response.json());
+			  }).catch((err) => {
+				  reject(err);
+			  })
+	  })
+});

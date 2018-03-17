@@ -10,8 +10,7 @@ class Signup extends Component {
         super(props);
         this.state = {
             signedUp: false,
-            message: "",
-            formType: 'signup'
+            message: ""
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);

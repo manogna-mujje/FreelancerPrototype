@@ -92,6 +92,20 @@
     border-radius: 5px;
   }
 
+  p#error-post-project {
+    color: firebrick;
+    display: none;
+    font-size: 80%;
+    font-weight: bold;
+    word-wrap: normal;
+    height: 75px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid rgb(233, 130, 130);
+    background-color: rgb(238, 194, 194);
+    border-radius: 5px;
+  }
+
   div .form-footer{
     font-size: 82%;
     margin: 10px;
@@ -106,3 +120,111 @@
   #logout {
     float: right;
   }
+
+  div.post-project{
+    padding: 10%;
+    width: 90%;
+  }
+
+  div.Fields{
+    padding: 10px;
+  }
+
+  div.post-project p{
+    color: dimgray;
+  }
+
+  .Fields input{
+    width: 100%;
+    height: 50px;
+    border: 1px solid;
+    border-radius: 4px;
+    color: grey;
+  }
+
+   label {
+    font-size: 130%;
+    font-weight: bold;
+  }
+
+  #project-description p {
+    font-size: 90%;
+  }
+
+  #project-description input {
+    height: 150px;
+  }
+
+  #payment {
+    width: 50;
+  }
+
+  .project-submit{
+    background-color: #ff7b00;
+  }
+
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: rgba(221, 221, 221, 0.137);
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: rgba(204, 204, 204, 0.452);
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid rgba(204, 204, 204, 0.452);
+  border-top: none;
+}
+
+#project-info{
+  background-color: darkslategray;
+  color: white;
+}
+
+div#project-buttons{
+  padding: 10px;
+  padding-top: 0;
+}
+
+#project-title {
+  background-color: rgb(26, 28, 44);
+  color: white;
+  padding: 20px;
+  height: 60px;
+  padding: 60px;
+  font-size: 220%;
+  flex: 1;
+  
+}
+
+.project-details {
+  width: 1440px;
+}
+
+div.container {
+  margin-left: 0px;
+  padding-left: 0px;
+}

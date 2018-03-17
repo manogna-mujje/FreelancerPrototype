@@ -118,3 +118,72 @@ export const checkSession = function (){
               credentials: 'include'
             })
 };
+
+export const postProject = function (title, description, skills, owner, budget){
+    url = `${api}/postProject`;
+    return fetch(url, {
+              method: 'POST',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+              },
+              credentials: 'include',
+              body: JSON.stringify({
+                title, 
+                description, 
+                skills, 
+                owner,
+                budget
+              })
+            }) 
+  };
+
+
+//   export const postBid = function (title, description, skills, owner, budget){
+//     url = `${api}/postBid`;
+//     return fetch(url, {
+//               method: 'POST',
+//               headers: {
+//                 'Accept': 'application/json',
+//                 'Content-Type': 'application/json',
+//               },
+//               credentials: 'include',
+//               body: JSON.stringify({
+//                 projectId, 
+//                 freelancerUsername, 
+//                 bidAmount, 
+//                 employerUsername
+//               })
+//             }) 
+//   };
+
+  export const showBids = function (project){
+    url = `${api}/showBids`;
+    console.log('Frontend API');
+    return fetch(url, {
+              method: 'POST',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+              },
+              credentials: 'include',
+              body: JSON.stringify({
+                project: project
+              })
+            }) 
+  };
+
+  export const showProjectDetails = function (project){
+    url = `${api}/showProjectDetails`;
+    return fetch(url, {
+              method: 'POST',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+              },
+              credentials: 'include',
+              body: JSON.stringify({
+                project: project
+              })
+            }) 
+  };

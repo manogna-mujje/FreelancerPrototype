@@ -1,5 +1,6 @@
 var express = require('express');
 var mysql = require ('./mysql');
+const uuidv4 = require('uuid/v4');
 
 
 var router = express.Router();
@@ -124,6 +125,101 @@ router.get('/checkSession', function(req, res, next){
     throw ('Session already ended.');
     // res.status(400);
   }
-})
+});
+
+/* Post Project */
+
+router.post('/postProject', function(req, res, next) {
+  let randomId = uuidv4();
+  //Insert a record in the "USERS" table:
+  var sql = "INSERT INTO PROJECTS SET ?";
+  var object = {
+                PROJECTID: randomId , 
+                PROJECTNAME: req.body.title, 
+                DESCRIPTION: req.body.description,
+                SKILLS: req.body.skills,
+                PROJECTOWNER: req.body.owner,
+                ESTIMATEDBUDGET: req.body.budget
+              };
+  function callback (err, result) { 
+    if(result){
+      console.log("1 record inserted");
+      res.status(200).send('Project Posted successfully');
+    } else {
+      res.status(400).send('Error occured while posting project to Database.');
+    }
+    return;
+  }
+  mysql.fetchData(callback, sql, object);
+});
+
+router.post('/postBid', function(req, res, next) {
+  let randomId = uuidv4();
+  //Insert a record in the "USERS" table:
+  var sql = "INSERT INTO BIDS SET ?";
+  var object = {
+                BIDID: randomId , 
+                PROJECTID: req.body.projectId, 
+                FREELANCERUSERNAME: req.body.freelancerUsername,
+                BIDAMOUNT: req.body.bidAmount,
+                EMPLOYERUSERNAME: req.body.employerUsername
+              };
+  function callback (err, result) { 
+    if(result){
+      console.log("1 record inserted");
+      res.status(200).send('Bid posted successfully');
+    } else {
+      res.status(400).send('Error occured while posting project to Database.');
+    }
+    return;
+  }
+  mysql.fetchData(callback, sql, object);
+});
+
+router.post('/showBids', function(req, res, next) {
+  console.log('Bids API hit.');
+  console.log(req.session);
+  console.log(req.body.project);
+  if (req.session && req.session.user) {
+    var sql =  "SELECT * FROM BIDS WHERE PROJECTID = (SELECT PROJECTID FROM PROJECTS WHERE PROJECTNAME = ?) ";
+    var object = [req.body.project];
+    function callback (err, result) { 
+      console.log(req.session.user);
+      /* Convert RowDataPacket into JSON object*/
+      var string=JSON.stringify(result);
+      var json =  JSON.parse(string);
+      console.log(JSON.stringify(json));
+      res.status(200).json({
+        list: JSON.stringify(json)
+      });
+      return;
+      }
+    mysql.fetchData(callback, sql, object);
+  }
+});
+
+router.post('/showProjectDetails', function(req, res, next) {
+  console.log('Show Projects API hit.');
+  console.log(req.session);
+  console.log(req.body.project);
+  if (req.session && req.session.user) {
+    var sql =  "SELECT * FROM PROJECTS WHERE PROJECTNAME = ? ";
+    var object = [req.body.project];
+    function callback (err, result) { 
+      console.log(req.session.user);
+      /* Convert RowDataPacket into JSON object*/
+      var string=JSON.stringify(result);
+      var json =  JSON.parse(string);
+      console.log(JSON.stringify(json));
+      res.status(200).json({
+        list: JSON.stringify(json)
+      });
+      return;
+      }
+    mysql.fetchData(callback, sql, object);
+  }
+}
+);
+
 module.exports = router;
 
