@@ -28,4 +28,16 @@ function fetchData(callback, sqlQuery, helper){
 	connection.end();
 }	
 
+
+function fetch(callback, sql){
+	var connection=getConnection();
+	connection.query(sql, function (err, result) {
+	if (err) throw err;
+	callback(err, result);
+	console.log("Result: " + result);
+	});
+	connection.end();
+}
+
+exports.fetch = fetch;
 exports.fetchData=fetchData;

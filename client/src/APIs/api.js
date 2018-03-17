@@ -139,23 +139,23 @@ export const postProject = function (title, description, skills, owner, budget){
   };
 
 
-//   export const postBid = function (title, description, skills, owner, budget){
-//     url = `${api}/postBid`;
-//     return fetch(url, {
-//               method: 'POST',
-//               headers: {
-//                 'Accept': 'application/json',
-//                 'Content-Type': 'application/json',
-//               },
-//               credentials: 'include',
-//               body: JSON.stringify({
-//                 projectId, 
-//                 freelancerUsername, 
-//                 bidAmount, 
-//                 employerUsername
-//               })
-//             }) 
-//   };
+  export const postBid = function ( projectId, freelancerUsername, bidAmount, employerUsername){
+    url = `${api}/postBid`;
+    return fetch(url, {
+              method: 'POST',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+              },
+              credentials: 'include',
+              body: JSON.stringify({
+                projectId, 
+                freelancerUsername, 
+                bidAmount, 
+                employerUsername
+              })
+            }) 
+  };
 
   export const showBids = function (project){
     url = `${api}/showBids`;
@@ -187,3 +187,16 @@ export const postProject = function (title, description, skills, owner, budget){
               })
             }) 
   };
+
+  export const showProjects = function (){
+    url = `${api}/showProjects`;
+    return fetch(url, {
+              method: 'GET',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+              },
+              credentials: 'include'
+            }) 
+  };
+

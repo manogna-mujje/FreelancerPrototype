@@ -4,33 +4,54 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Login } from './login';
-import { store } from '../index'
-import {checkSession} from '../actions/index';
+import { checkSession } from '../actions/index';
+import ProjectItem from './projectItem';
 
 class Home extends Component {
     constructor(props){
         super(props);
-        console.log(this.props.location);
+        this.state = {
+            projects: []
+        }
     }
 
-    // componentDidMount(){
-    //     // API.checkSession().then((res)=> {
-    //     //     console.log(res);
-    //     //     this.state = {
-    //     //         isLoggedin: true,
-    //     //         user: res.value.user
-    //     //     }
-    //     // })
-    //     console.log(API.checkSession());
-    // }
+    componentDidMount(){
+        this.props.checkSession().then((res)=> {
+            console.log(this.props.user);
+        })
+        API.showProjects().then((res) => {
+            res.json().then((data) => {
+                console.log(data);
+                data.list.map(proj => {
+                    console.log(proj);
+                })
+                console.log(Array.isArray(data.list));
+                this.setState({
+                    projects: data.list
+                })
+            })
+        })
+    }
 
     
     render(){
-        // store.dispatch(checkSession());
+        console.log( (Array.from(this.state.projects) ));
+        let projectItems
+        if(this.state.projects){
+        projectItems = this.state.projects.map(project => {
+            console.log(project);
+            return (
+                <ProjectItem key={project.PROJECTNAME} project={project} user={this.props.user}/>
+            );
+        });
+        }
         return (
             <div>
-                <h1> Welcome back, </h1>
-                <Link className="menu-button" to="/post-project">  Post a Project  </Link>
+                <h1> Welcome back, {this.props.user} </h1>
+                <div className="Projects">
+               <p> <Link className="menu-button" id="post-project" to="/post-project">  Post a Project  </Link> </p> <br/>
+                {projectItems}
+                </div>
             </div>
         );
     }
@@ -42,4 +63,10 @@ function mapStateToProps(state) {
         user: state.session.user
     };
 }
-export default connect(mapStateToProps, null) (Home); 
+
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({ 
+            checkSession: checkSession
+        }, dispatch);
+}
+export default connect(mapStateToProps, mapDispatchToProps) (Home); 

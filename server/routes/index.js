@@ -221,5 +221,27 @@ router.post('/showProjectDetails', function(req, res, next) {
 }
 );
 
+
+router.get('/showProjects', function(req, res, next) {
+  console.log('testing');
+  if (req.session && req.session.user) {
+    var sql =  "SELECT * FROM PROJECTS";
+    function callback (err, result) { 
+      console.log(req.session.user);
+      console.log(result);
+      /* Convert RowDataPacket into JSON object*/
+      var string=JSON.stringify(result);
+      var json =  JSON.parse(string);
+      console.log(json);
+      console.log(JSON.stringify(json));
+      res.status(200).json({
+        list: json
+      });
+      return;
+      }
+    mysql.fetch(callback, sql);
+  }
+}
+);
 module.exports = router;
 

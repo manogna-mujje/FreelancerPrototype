@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import * as API from '../APIs/api';
-import {checkSession} from '../actions/index';
+import { checkSession } from '../actions/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -13,7 +13,7 @@ class Profile extends Component {
 
     componentDidMount(){
        console.log(this.props.checkSession());
-        this.props.checkSession().then((res)=> {
+        this.props.checkSession.then((res)=> {
             console.log(res);
             if(!this.props.isLoggedin || (this.props.match.params.user !== this.props.user)){
                 this.props.history.push('/login');
