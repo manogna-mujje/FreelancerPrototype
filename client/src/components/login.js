@@ -67,22 +67,25 @@ class Login extends Component {
 
     render() {
         return (
-            <div className="loginForm">
-            <form onSubmit={this.handleSubmit}>
-                <p id="error-message"> The email and password you entered did not match our records. Please double-check and try again. </p>
-                <input className="inputField" type="text" id= "id-username"  name="username" placeholder="Username"
-                onChange={this.handleChange}
-                /> <br />
-                <input className="inputField" type="password" id= "id-password"  name="password" placeholder="Password"
-                onChange={this.handleChange}
-                /> <br />
-                <input className="inputField" id="submit" type="submit" value="Login"/>
-            </form>
-            
-            <br /> 
-            <br />
-            <br /> 
-            <div className = "form-footer"> Don't have an account? <span> <Link to= '/signup'>Sign Up. </Link> </span> </div>
+            <div className="login-container"> 
+                <div className="loginForm">
+                <form onSubmit={this.handleSubmit}>
+                    <h4> Login Account </h4> <br/>
+                    <p id="error-message"> The email and password you entered did not match our records. Please double-check and try again. </p>
+                    <input className="inputField" type="text" id= "id-username"  name="username" placeholder="Username"
+                    onChange={this.handleChange}
+                    /> <br />
+                    <input className="inputField" type="password" id= "id-password"  name="password" placeholder="Password"
+                    onChange={this.handleChange}
+                    /> <br />
+                    <input className="inputField" id="submit" type="submit" value="Login"/>
+                </form>
+                
+                <br /> 
+                <br />
+                <br /> 
+                <div className = "form-footer"> Don't have an account? <span> <Link to= '/signup'>Sign Up. </Link> </span> </div>
+            </div>
         </div>
         )
     }

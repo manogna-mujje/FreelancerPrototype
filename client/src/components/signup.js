@@ -68,31 +68,34 @@ class Signup extends Component {
     
     render() {
         return (
-            <div className="signupForm" name="signupForm">
-                <form onSubmit={this.handleSubmit}>
-                    <input
-                        className="inputField" type="email" id= "id-email"  name="email"  placeholder="Email Address"
-                        onChange={this.handleChange}
-                    /> <br />
-                    <p className="message" id="email-message"> {this.handleOutput('email')} </p>
-                    <input className="inputField" type="text" id= "id-username"  name="username" placeholder="Username"
-                        onChange={this.handleChange}
-                    /> <br />
-                     <p className="message" id="username-message"> {this.handleOutput('username')} </p>
-                    <input className="inputField" type="password" id= "id-password"  name="password" placeholder="Password"
-                        onChange={this.handleChange}
-                    /> <br />
-                    <p className="message" id="password-message"> {this.handleOutput('password')} </p>
-                    <input type="radio" name="accountType" value="hire"> Hire </input>
-                    <input type="radio" name="accountType" value="work"> Work </input> <br/>
-                    <input className="inputField" id="submit" type="submit" value="Create Account" /> 
-                </form>
-                <div className="form-footer"> By registering you confirm that you accept the <span> <a href= 'https://www.google.com/'> Terms and Conditions </a> </span> and <span> <a href= 'https://www.google.com/'>Privacy Policy </a> </span></div>
-                <br /> 
-                <br />
-                <br /> 
-                <br />
-                <div className = "form-footer"> Already a Freelancer.com member? <span> <Link to= '/login'>Log In </Link> </span> </div>
+            <div className= "signup-container"> 
+                <div className="signupForm" name="signupForm">
+                    <form onSubmit={this.handleSubmit}>
+                         <h4> Sign Up for <i> free </i> today! </h4> <br/>
+                        <input
+                            className="inputField" type="email" id= "id-email"  name="email"  placeholder="Email Address"
+                            onChange={this.handleChange}
+                        /> <br />
+                        <p className="message" id="email-message"> {this.handleOutput('email')} </p>
+                        <input className="inputField" type="text" id= "id-username"  name="username" placeholder="Username"
+                            onChange={this.handleChange}
+                        /> <br />
+                        <p className="message" id="username-message"> {this.handleOutput('username')} </p>
+                        <input className="inputField" type="password" id= "id-password"  name="password" placeholder="Password"
+                            onChange={this.handleChange}
+                        /> <br />
+                        <p className="message" id="password-message"> {this.handleOutput('password')} </p>
+                        <input type="radio" name="accountType" value="hire"> Hire </input>
+                        <input type="radio" name="accountType" value="work"> Work </input> <br/>
+                        <input className="inputField" id="submit" type="submit" value="Create Account" /> 
+                    </form>
+                    <div className="form-footer"> By registering you confirm that you accept the <span> <a href= 'https://www.google.com/'> Terms and Conditions </a> </span> and <span> <a href= 'https://www.google.com/'>Privacy Policy </a> </span></div>
+                    <br /> 
+                    <br />
+                    <br /> 
+                    <br />
+                    <div className = "form-footer"> Already a Freelancer.com member? <span> <Link to= '/login'>Log In </Link> </span> </div>
+                </div>
             </div>
         );
     }

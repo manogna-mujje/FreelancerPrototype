@@ -243,5 +243,34 @@ router.get('/showProjects', function(req, res, next) {
   }
 }
 );
-module.exports = router;
 
+/* Update Profile */
+
+router.post('/updateProfile', function(req, res, next) {
+  if (!req.files)
+    return res.status(400).send('No files were uploaded.');
+    console.log(req.files.picture);
+  var file = req.files.picture;
+ var img_name=file.name;
+ file.mv('public/images/upload_images/'+file.name, function(err) {                        
+    if (err)
+    return res.status(500).send(err);
+  //Insert a record in the "USERS" table:
+  var sql = "UPDATE USERS SET FIRSTNAME ="+ req.body.firstName  + ", LASTNAME=" + req.body.lastname + ", LOCATION=" + req.body.location + ", COUNTRY=" + req.body.country + ", PHONE = " + req.body.phone + ", IMAGE=" + img_name + " WHERE USERNAME = ?";
+  var object = [req.session.user];
+  function callback (err, result) {
+    if(result){
+      console.log("1 record inserted");
+      res.status(200).send('Profile updated');
+    } else {
+      res.status(400).send('Error occured');
+    }
+    return;
+  }
+  mysql.fetchData(callback, sql, object);
+}
+);
+})
+
+
+module.exports = router;

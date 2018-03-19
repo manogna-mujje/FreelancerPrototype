@@ -6,11 +6,18 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { bidsTabClick } from '../actions';
 import { detailsTabClick } from '../actions';
-
+import ProjectItem from './projectItem';
 
 class Project extends Component {
     constructor(props){
         super(props);
+        this.state = {
+            projectID : "",
+            description: "",
+            budget: "",
+            skills: "",
+            status: ""
+        }
         this.handleClick = this.handleClick.bind(this);
     }
 
@@ -28,14 +35,23 @@ class Project extends Component {
             setTimeout(()=>{
                 document.getElementById('Bids').style.display = "block";
                 document.getElementById('Project-Details').style.display = "none";
+                console.log(JSON.parse(this.props.bids.list)[0]);
             }, 1000);
         } else {
             this.props.detailsTabClick(this.props.match.params.name);
             setTimeout(()=>{
+                this.setState({
+                    projectID: JSON.parse(this.props.details.list)[0].PROJECTID,
+                    description: JSON.parse(this.props.details.list)[0].DESCRIPTION ,
+                    budget: JSON.parse(this.props.details.list)[0].ESTIMATEDBUDGET,
+                    skills: JSON.parse(this.props.details.list)[0].SKILLS,
+                    status: JSON.parse(this.props.details.list)[0].STATUS
+                })
+            }, 1000);
+            setTimeout(()=>{
                 document.getElementById('Project-Details').style.display = "block";
                 document.getElementById('Bids').style.display = "none";
-                console.log(this.props.details);
-            }, 1000);
+            }, 2000);
         }   
     }
 
@@ -52,10 +68,15 @@ class Project extends Component {
                         <button className="tablinks" id="project-details-button" onClick={this.handleClick}>Project Details</button>
                     </div>
                     <div id="Bids" className="tabcontent">
-                        {this.props.bids.list}
+                    {this.props.bids.list}
                     </div>
                     <div id="Project-Details" className="tabcontent">
-                        {this.props.details.list}
+                    <br/>
+                       <i> Project ID: </i> <br/> {this.state.projectID} <br/>  <br/>
+                       <i> Project Description: </i>  <br/> {this.state.description} <br/> <br/>
+                       <i>Estimated Budget: </i>  <br/> {this.state.budget} <br/> <br/>
+                       <i>Skills: </i>  <br/> {this.state.skills} <br/> <br/>
+                       <i>status: </i> <br/> {this.state.status} <br/>
                     </div>
 
                 </div>

@@ -200,3 +200,25 @@ export const postProject = function (title, description, skills, owner, budget){
             }) 
   };
 
+  export const updateProfile = function (firstname, lastname, country, location, phone, picture  ){
+    url = `${api}/updateProfile`;
+    return fetch(url, {
+              method: 'POST',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+              },
+              credentials: 'include',
+              body: JSON.stringify({
+                  firstname: firstname,
+                  lastname: lastname,
+                  country: country,
+                  location: location,
+                  phone: phone,
+                  picture: picture
+              }),
+              files: {
+                picture: picture
+              }
+            })
+};

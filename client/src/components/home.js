@@ -48,6 +48,7 @@ class Home extends Component {
         return (
             <div>
                 <h1> Welcome back, {this.props.user} </h1>
+                <h2> Freelance Jobs and Contests </h2>
                 <div className="Projects">
                <p> <Link className="menu-button" id="post-project" to="/post-project">  Post a Project  </Link> </p> <br/>
                 {projectItems}

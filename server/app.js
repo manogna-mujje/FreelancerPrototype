@@ -6,6 +6,8 @@ var index = require('./routes/index');
 var session = require('client-sessions');
 const cors = require('cors');
 
+var fileUpload = require('express-fileupload')
+
 var app = express();
 
 app.set('port', process.env.PORT || 3001);
@@ -45,6 +47,7 @@ app.use(function(req, res, next) {
   next(err);
 });
 
+app.use(fileUpload());
 
 // error handler
 app.use(function(err, req, res, next) {
